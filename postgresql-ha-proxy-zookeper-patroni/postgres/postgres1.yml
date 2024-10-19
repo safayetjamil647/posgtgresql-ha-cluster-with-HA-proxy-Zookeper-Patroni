@@ -1,0 +1,22 @@
+scope: batman
+name: postgresql1
+
+restapi:
+  listen: pg-slave:8008
+  connect_address: pg-slave:8008
+
+zookeeper:
+  hosts:
+    - zoo1:2181
+
+bootstrap:
+  dcs:
+    ttl: 30
+    loop_wait: 10
+    retry_timeout: 10
+    postgresql:
+      parameters:
+        wal_level: replica
+        hot_standby: "on"
+        max_wal_senders: 10
+        max_replication_slots: 10
